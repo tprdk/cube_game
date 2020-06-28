@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <script id="vertex-shader" type="x-shader/x-vertex">
+
+    attribute  vec4 vPosition;
+    attribute  vec4 vColor;
+    varying vec4 fColor;
+
+
+    uniform mat4 modelViewProjectionMatrix;
+
+    void main()
+    {
+        gl_Position = modelViewProjectionMatrix * vPosition;
+        fColor = vColor;
+    }
+
+  </script>
+
+  <script id="fragment-shader" type="x-shader/x-fragment">
+
+    #ifdef GL_ES
+    precision highp float;
+    #endif
+
+
+    varying vec4 fColor;
+
+    void
+    main()
+    {
+        gl_FragColor = fColor;
+    }
+
+  </script>
+
+  <script type="text/javascript" src="../Common/webgl-utils.js"></script>
+  <script type="text/javascript" src="../Common/initShaders.js"></script>
+  <script type="text/javascript" src="../Common/MV.js"></script>
+  <script type="text/javascript" src="perspective2.js"></script>
+
+  <body bgcolor="darkGray">
+    <table border="1">
+      <tr>
+        <td>
+          <canvas id="gl-canvas" width="1020" height="550">
+            Oops ... your browser doesn't support the HTML5 canvas element
+          </canvas>
+          <br />
+          Axes: x-Axis: blue, y-axis: black, z-axis: red
+        </td>
+
+        <td>
+          <div>
+            Press the button to start playing :)
+          </div>
+          <input type="button" id="myButton" value="Start!"> 
+        
+          <div>
+            Difficulty 0<input
+              id="difficultySlider"
+              type="range"
+              min="0"
+              max="20"
+              step="1"
+              value="4"
+            />
+            20
+            <span id="difficultyValue">4</span>
+          </div>
+          
+          <div>
+            Score:  <output id="score" value="0">0 </output>
+          
+          </div>
+
+          <p></p>
+          
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
